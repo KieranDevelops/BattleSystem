@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class StatsSystem : MonoBehaviour
 {
+    #region Variables are stored here...
     /// Our physical stats that determine our dancing stats.
     public int playerOneAgility = 0;
     public int playerOneIntelligence = 0;
@@ -29,9 +30,13 @@ public class StatsSystem : MonoBehaviour
     public int playerTwoRhythm = 0;
 
     public bool doesWork = true;
-
+    #endregion
     private void Start()
     {
+        ///</summary>
+        /// In here we show some alternate working out using Random.Range with out setting a statpool.
+        ///</summary>
+        #region Example of alternate working out...
         // set out agility, strength and intelligence to a random number between zero and ten.
         // We can find our Random value for each class with this style here but using the statpool provides more accurate results.
         /*
@@ -43,26 +48,35 @@ public class StatsSystem : MonoBehaviour
         *playerTwoStrength = Random.Range(0, 11);
         */
 
-    
+        #endregion
+
+        ///</summary>
+        ///In here shows the full calculation of how to find the players stat levels and how to set modifiers that will effect these stats to become dancing stats.
+        ///</summary>
+        #region Calculating Stats for players...
         // BONUS! let's try taking our stats away from a pool of stats, i.e. 20 total, distributing this amoungst all the stats.
-        
-        int statPool = 30;
 
-         playerOneAgility = (playerOneAgility + statPool + 1);
-        statPool = (statPool - playerOneAgility);
-         playerOneStrength = (playerOneStrength + statPool + 1);
-        statPool = (statPool - playerOneStrength);
-        playerOneIntelligence = playerOneIntelligence + statPool + 1;
-        statPool = (statPool - playerOneIntelligence);
+        int statPool = 31;
 
-        int statPoolTwo = 30;
+        playerOneAgility = Random.Range(0, statPool);
+        statPool = (playerOneAgility - statPool); // By taking away from the stat pool with the variable is was just used with, it changed value to a random number that will allow for the next variable to be allocated accurately.
 
-            playerTwoAgility = (playerTwoAgility + statPoolTwo + 1);
-        statPoolTwo = (statPoolTwo - playerTwoAgility);
-        playerTwoStrength = (playerTwoStrength + statPoolTwo + 1);
-        statPoolTwo = (statPoolTwo - playerTwoStrength);
-        playerTwoIntelligence = playerTwoIntelligence + statPoolTwo + 1;
-        statPoolTwo = (statPoolTwo - playerTwoIntelligence);
+         playerOneStrength = Random.Range(0, statPool);
+        statPool = (playerOneStrength - statPool);
+
+        playerOneIntelligence = Random.Range(0, statPool);
+        statPool = (playerOneIntelligence - statPool);
+
+        int statPoolTwo = 31;
+
+        playerTwoAgility = Random.Range(0, statPoolTwo);
+        statPoolTwo = (playerTwoAgility - statPoolTwo); 
+
+        playerTwoStrength = Random.Range(0, statPoolTwo);
+        statPoolTwo = (playerTwoStrength - statPoolTwo);
+
+        playerTwoIntelligence = Random.Range(0, statPoolTwo);
+        statPoolTwo = (playerTwoIntelligence - statPoolTwo);
 
         // Debug out your current physical stat values (strength, agility, intelligence).
 
@@ -138,5 +152,7 @@ public class StatsSystem : MonoBehaviour
         Debug.Log(playerOneStyle + " -is my style level, " + playerTwoStyle + "-is player twos style level," +
             playerOneLuck + "-is my luck level, " + playerTwoLuck + "-is player twos luck level," +
             playerOneRhythm + "-is my rhythm level, " + playerTwoRhythm + "-is player twos rhythm level");
+        #endregion 
     }
+
 }
