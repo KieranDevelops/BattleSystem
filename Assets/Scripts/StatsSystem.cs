@@ -9,54 +9,134 @@ using UnityEngine;
 public class StatsSystem : MonoBehaviour
 {
     /// Our physical stats that determine our dancing stats.
-    public int agility;
-    public int intelligence;
-    public int strength;
+    public int playerOneAgility = 0;
+    public int playerOneIntelligence = 0;
+    public int playerOneStrength = 0;
+    public int playerOnePowerLevel = 0;
+
+    public int playerTwoAgility = 0;
+    public int playerTwoIntelligence = 0;
+    public int playerTwoStrength = 0;
+    public int playerTwoPowerLevel = 0;
 
     // Our variables used to determine our fighting power.
-    public int style;
-    public int luck;
-    public int rhythm;
+    public int playerOneStyle = 0;
+    public int playerOneLuck = 0;
+    public int playerOneRhythm = 0;
+
+    public int playerTwoStyle = 0;
+    public int playerTwoLuck = 0;
+    public int playerTwoRhythm = 0;
+
+    public bool doesWork = true;
 
     private void Start()
     {
         // set out agility, strength and intelligence to a random number between zero and ten.
+        // We can find our Random value for each class with this style here but using the statpool provides more accurate results.
+        /*
+        *playerOneAgility = Random.Range(0, 11);
+        *playerOneIntelligence = Random.Range(0, 11);
+        *playerOneStrength = Random.Range(0, 11);
+        *playerTwoAgility = Random.Range(0, 11);
+        *playerTwoIntelligence = Random.Range(0, 11);
+        *playerTwoStrength = Random.Range(0, 11);
+        */
+
+    
         // BONUS! let's try taking our stats away from a pool of stats, i.e. 20 total, distributing this amoungst all the stats.
-        strength = 0;
-        agility = 0;
-        intelligence = 0;
+        
+        int statPool = 30;
+
+         playerOneAgility = (playerOneAgility + statPool + 1);
+        statPool = (statPool - playerOneAgility);
+         playerOneStrength = (playerOneStrength + statPool + 1);
+        statPool = (statPool - playerOneStrength);
+        playerOneIntelligence = playerOneIntelligence + statPool + 1;
+        statPool = (statPool - playerOneIntelligence);
+
+        int statPoolTwo = 30;
+
+            playerTwoAgility = (playerTwoAgility + statPoolTwo + 1);
+        statPoolTwo = (statPoolTwo - playerTwoAgility);
+        playerTwoStrength = (playerTwoStrength + statPoolTwo + 1);
+        statPoolTwo = (statPoolTwo - playerTwoStrength);
+        playerTwoIntelligence = playerTwoIntelligence + statPoolTwo + 1;
+        statPoolTwo = (statPoolTwo - playerTwoIntelligence);
 
         // Debug out your current physical stat values (strength, agility, intelligence).
 
+        Debug.Log("My agility is : " + playerOneAgility +
+            "My strength is: " + playerOneStrength +
+            "My Intelligence is: " + playerOneIntelligence);
+
+        Debug.Log("Player two agility is : " + playerTwoAgility +
+            "Player two strength is: " + playerTwoStrength +
+            "Player two Intelligence is: " + playerTwoIntelligence);
+        
+        
+
         // let's create some float temporary variables to hold our multiplier values.
 
-        // create an agility multiplier should be set to 0.5
-        
-        // create a strength multiplier should be set to 1
+        /* create an agility multiplier should be set to 0.5
+         *create a strength multiplier should be set to 1
+         *create an intelligence multiplier should be set to 1.5.
+         */
 
-        // create an intelligence multiplier should be set to 2.
+        float agilMulti = 0.5f;
+        float strMulti = 1.0f;
+        float intelMutli = 1.5f;
 
         // Debug out our current multiplier values.
+        Debug.Log(agilMulti + "is the current agility multiplier - " + 
+            strMulti + "is the current strength multiplier - " + 
+            intelMutli + "is the current intelligence multiplier - ");
 
         // now that we have some stats and our multiplier values let's calculate our style, luck and ryhtmn based on these values.
 
         // style should be based off our strength and be converted at a rate of 1 : 1.
-        style = 0;
+        playerOneStyle = (int)(playerOneStrength * strMulti);
+        playerTwoStyle = (int)(playerTwoStrength * strMulti);
         // luck should be based off our intelligence and be converted at a rate of 1 : 1.5f
-        luck = 0;
+        playerOneLuck = (int)(playerOneIntelligence * intelMutli);
+        playerTwoLuck = (int)(playerTwoIntelligence * intelMutli);
         // rhythm should be based off our agility and be converted at a rate of 1 : 0.5.
-        rhythm = 0;
+        playerOneRhythm = (int)(playerOneAgility * agilMulti);
+        playerTwoRhythm = (int)(playerTwoAgility * agilMulti);
 
         // Debug out our current dancing stat values (style, luck, rhythm)
+
+        Debug.Log(playerOneStyle + " -is my style level, " + playerTwoStyle + "-is player twos style level," +
+            playerOneLuck + "-is my luck level, " + playerTwoLuck + "-is player twos luck level," + 
+            playerOneRhythm + "-is my rhythm level, " + playerTwoRhythm + "-is player twos rhythm level"); 
+        
 
         // now let's imagine that our level has increased; and we've been granted 10 new stat points.
         // let's distribute those stats amoungst our strength and agility and intelligence.
         int additionalPoints = 10;
+        playerOneStrength = (playerOneStrength + Random.Range(0, additionalPoints +1));
+        playerOneAgility = (playerOneAgility + Random.Range(0, additionalPoints +1));
+        playerOneIntelligence = (playerOneIntelligence + Random.Range(0, additionalPoints +1));
 
         // Debug out our new physical stat values
+        Debug.Log("My agility is : " + playerOneAgility +
+            "My strength is: " + playerOneStrength +
+            "My Intelligence is: " + playerOneIntelligence);
 
-        // let's recalculate our style, luck and rhytmn as our initial stats have changed.
+        // let's recalculate our style, luck and rhythm as our initial stats have changed.
         
+        playerOneStyle = (int)(playerOneStrength * strMulti);
+        playerTwoStyle = (int)(playerTwoStrength * strMulti);
+       
+        playerOneLuck = (int)(playerOneIntelligence * intelMutli);
+        playerTwoLuck = (int)(playerTwoIntelligence * intelMutli);
+        
+        playerOneRhythm = (int)(playerOneAgility * agilMulti);
+        playerTwoRhythm = (int)(playerTwoAgility * agilMulti);
+
         // Debug out our new dancing stat values
+        Debug.Log(playerOneStyle + " -is my style level, " + playerTwoStyle + "-is player twos style level," +
+            playerOneLuck + "-is my luck level, " + playerTwoLuck + "-is player twos luck level," +
+            playerOneRhythm + "-is my rhythm level, " + playerTwoRhythm + "-is player twos rhythm level");
     }
 }
